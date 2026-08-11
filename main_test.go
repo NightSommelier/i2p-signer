@@ -28,7 +28,7 @@ func TestI2PDLeaseSetKeyIsRejected(t *testing.T) {
 	}
 }
 
-func TestAddressbookSeedPubkeySignsWithStoredPublicKey(t *testing.T) {
+func TestSignerSeedPubkeySignsWithStoredPublicKey(t *testing.T) {
 	seed := make([]byte, 32)
 	for i := range seed {
 		seed[i] = byte(i + 1)
@@ -39,7 +39,7 @@ func TestAddressbookSeedPubkeySignsWithStoredPublicKey(t *testing.T) {
 	data = append(data, privateKey[32:64]...)
 
 	material := keyMaterial{
-		format:      "Addressbook seed+pubkey",
+		format:      "i2p-signer seed+pubkey",
 		signSeed:    data[:32],
 		signingPub:  ed25519.PublicKey(privateKey[32:64]),
 		destination: privateKey[32:64],

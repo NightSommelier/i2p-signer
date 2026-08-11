@@ -139,7 +139,7 @@ func loadKeyMaterial(keyPath string) (*keyMaterial, error) {
 		if equalBytes(derivedPub, data[32:64]) {
 			destination := append([]byte(nil), derivedPub...)
 			return &keyMaterial{
-				format:       "Addressbook seed+pubkey",
+				format:       "i2p-signer seed+pubkey",
 				signSeed:     append([]byte(nil), seed...),
 				signingPub:   append(ed25519.PublicKey(nil), derivedPub...),
 				destination:  destination,
@@ -147,7 +147,7 @@ func loadKeyMaterial(keyPath string) (*keyMaterial, error) {
 			}, nil
 		}
 
-		return nil, fmt.Errorf("unsupported 64-byte key format: expected addressbook seed+pubkey; i2pd .4.dat/.6.dat LeaseSet keys are not destination signing keys")
+		return nil, fmt.Errorf("unsupported 64-byte key format: expected i2p-signer seed+pubkey; i2pd .4.dat/.6.dat LeaseSet keys are not destination signing keys")
 	}
 
 	if material, ok, err := loadFullI2PPrivateKey(data); ok || err != nil {

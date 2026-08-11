@@ -10,6 +10,11 @@
 - Added the MIT License with the Sommelier copyright notice, which must be
   retained in redistributed copies or substantial portions of the software.
 
+### Changed
+- Made key-format naming and public documentation independent of the former
+  parent project.
+- Ignored local binary and cross-compilation output directories.
+
 ## 2026-07-02
 
 ### Tests
@@ -17,4 +22,4 @@
 
 ### Notes
 - No private key material, local filesystem paths, private domains, or deployment details are documented here.
-- Owner authentication messages should be signed exactly as shown by the addressbook server, including any nonce lines.
+- Ownership challenge messages should be signed exactly as shown by the service, including any nonce lines.

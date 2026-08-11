@@ -2,16 +2,16 @@
 
 `i2p-signer` is a small offline command-line utility for I2P destination-key
 workflows. It allows a domain owner to prove control of an Ed25519 signing key
-without sending the private key to an addressbook, web service, or browser.
+without sending the private key to a remote service, web service, or browser.
 
 It is designed to live as an independent GitHub project. The binary makes no
 network requests, retains no keys, and does not configure I2P routers.
 
 ## Why It Exists
 
-An I2P addressbook must verify that the person asking to manage a hostname
-controls the destination associated with it. `i2p-signer` keeps that proof on
-the owner's machine:
+A destination-management service must verify that the person asking to manage
+a hostname controls its associated destination. `i2p-signer` keeps that proof
+on the owner's machine:
 
 ```text
 service creates an exact challenge with a nonce
