@@ -1,0 +1,67 @@
+name: Build binaries
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: go test ./...
+      - run: go vet ./...
+
+  build:
+    name: ${{ matrix.name }}
+    needs: test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-amd64
+            goos: linux
+            goarch: amd64
+            extension: ""
+          - name: linux-arm64
+            goos: linux
+            goarch: arm64
+            extension: ""
+          - name: darwin-amd64
+            goos: darwin
+            goarch: amd64
+            extension: ""
+          - name: darwin-arm64
+            goos: darwin
+            goarch: arm64
+            extension: ""
+          - name: windows-amd64
+            goos: windows
+            goarch: amd64
+            extension: .exe
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Build
+        env:
+          CGO_ENABLED: "0"
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -trimpath -ldflags="-s -w" -o dist/i2p-signer-${{ matrix.name }}${{ matrix.extension }} .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: i2p-signer-${{ matrix.name }}
+          path: dist/i2p-signer-${{ matrix.name }}${{ matrix.extension }}
+          if-no-files-found: error
