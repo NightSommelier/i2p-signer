@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.0 - 2026-08-11
+
+### Added
+- First standalone public release with MIT licensing, security policy, and
+  GitHub Actions builds for Linux, macOS, and Windows.
+- Automated tagged-release publishing with five binaries and SHA-256 checksums.
+
 ## 2026-08-11
 
 ### Documentation

@@ -91,6 +91,19 @@ GitHub Actions runs tests and produces artifacts for Linux, macOS, and Windows
 on every pull request, push to `main`, and manual workflow run. See
 [build.yml](.github/workflows/build.yml).
 
+## Releases
+
+Version tags use the `vMAJOR.MINOR.PATCH` form. Pushing a `v*` tag runs the
+same test and cross-build matrix, creates a GitHub Release, and attaches all
+five binaries plus `SHA256SUMS`.
+
+Download binaries only from the repository's GitHub Releases page. Verify the
+downloaded binary against `SHA256SUMS` before executing it:
+
+```bash
+sha256sum --check SHA256SUMS
+```
+
 ## Commands
 
 ```bash
@@ -115,7 +128,7 @@ cause verification to fail.
   request.
 - Submit a signature only to the service that issued its challenge.
 - Download binaries only from the repository's GitHub Actions artifacts or
-  authenticated releases, then validate any published checksum.
+  GitHub Releases, then validate the published checksum.
 - Report vulnerabilities through the process in [SECURITY.md](SECURITY.md).
 
 ## Development
