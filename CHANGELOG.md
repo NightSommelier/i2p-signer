@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- Checked out the repository before GitHub Release publishing so future tagged
+  workflows can resolve the release tag and upload assets.
+
 ## v0.1.0 - 2026-08-11
 
 ### Added
